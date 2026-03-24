@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Usuario - Sistema de Gestión de Producción</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: white;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 25mm 20mm;
+            page-break-after: always;
+            position: relative;
+        }
+
+        .page:last-child {
+            page-break-after: avoid;
+        }
+
+        /* Portada */
+        .cover {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 247mm;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            margin: -25mm -20mm;
+            padding: 40mm 20mm;
+        }
+
+        .cover h1 {
+            font-size: 42pt;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .cover .subtitle {
+            font-size: 18pt;
+            font-weight: 300;
+            margin-bottom: 60px;
+            color: #94a3b8;
+        }
+
+        .cover .version {
+            font-size: 12pt;
+            color: #64748b;
+            margin-bottom: 10px;
+        }
+
+        .cover .author {
+            font-size: 11pt;
+            color: #94a3b8;
+            margin-top: 40px;
+        }
+
+        .cover .company {
+            font-size: 10pt;
+            color: #64748b;
+            margin-top: 5px;
+        }
+
+        /* Tabla de contenido */
+        .toc-page {
+            background: #fff;
+        }
+
+        .toc-title {
+            font-size: 24pt;
+            color: #1e293b;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3b82f6;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 12pt;
+        }
+
+        .toc-list li a {
+            color: #334155;
+            text-decoration: none;
+        }
+
+        .toc-list li span.number {
+            color: #3b82f6;
+            font-weight: bold;
+            margin-right: 15px;
+            display: inline-block;
+            width: 30px;
+        }
+
+        /* Encabezados de sección */
+        .section-header {
+            background: #1e293b;
+            color: white;
+            padding: 15px 25px;
+            margin: -25mm -20mm 25px -20mm;
+            font-size: 18pt;
+            font-weight: 600;
+        }
+
+        h2 {
+            font-size: 18pt;
+            color: #1e293b;
+            margin: 25px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3b82f6;
+        }
+
+        h3 {
+            font-size: 14pt;
+            color: #334155;
+            margin: 20px 0 10px 0;
+        }
+
+        h4 {
+            font-size: 12pt;
+            color: #475569;
+            margin: 15px 0 8px 0;
+        }
+
+        /* Párrafos y texto */
+        p {
+            font-size: 11pt;
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+
+        /* Listas */
+        ul, ol {
+            margin: 10px 0 15px 25px;
+        }
+
+        li {
+            font-size: 11pt;
+            margin-bottom: 6px;
+        }
+
+        /* Tablas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 10pt;
+        }
+
+        th {
+            background: #1e293b;
+            color: white;
+            padding: 10px 8px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        /* Cajas de información */
+        .info-box {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .info-box.warning {
+            background: #fef3c7;
+            border-left-color: #f59e0b;
+        }
+
+        .info-box.success {
+            background: #d1fae5;
+            border-left-color: #10b981;
+        }
+
+        .info-box.danger {
+            background: #fee2e2;
+            border-left-color: #ef4444;
+        }
+
+        .info-box-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #1e40af;
+        }
+
+        .info-box.warning .info-box-title {
+            color: #92400e;
+        }
+
+        .info-box.success .info-box-title {
+            color: #065f46;
+        }
+
+        .info-box.danger .info-box-title {
+            color: #991b1b;
+        }
+
+        /* Credenciales */
+        .credentials {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .credentials-title {
+            font-weight: bold;
+            color: #0369a1;
+            margin-bottom: 10px;
+        }
+
+        .credential-item {
+            font-family: 'Courier New', monospace;
+            font-size: 10pt;
+            margin: 5px 0;
+            padding: 5px 10px;
+            background: white;
+            border-radius: 3px;
+        }
+
+        /* Roles */
+        .role-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .role-title {
+            font-size: 13pt;
+            font-weight: bold;
+            color: #1e293b;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3b82f6;
+        }
+
+        .role-admin { border-top: 4px solid #dc2626; }
+        .role-supervisor { border-top: 4px solid #ea580c; }
+        .role-operario { border-top: 4px solid #16a34a; }
+
+        .role-admin .role-title { color: #dc2626; border-bottom-color: #dc2626; }
+        .role-supervisor .role-title { color: #ea580c; border-bottom-color: #ea580c; }
+        .role-operario .role-title { color: #16a34a; border-bottom-color: #16a34a; }
+
+        /* Estados */
+        .estado {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 9pt;
+            font-weight: 600;
+        }
+
+        .estado-pendiente { background: #fef3c7; color: #92400e; }
+        .estado-proceso { background: #dbeafe; color: #1e40af; }
+        .estado-pausada { background: #fce7f3; color: #9d174d; }
+        .estado-completada { background: #d1fae5; color: #065f46; }
+        .estado-cancelada { background: #fee2e2; color: #991b1b; }
+
+        /* Diagrama de flujo */
+        .flujo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 6px;
+        }
+
+        .flujo-item {
+            background: white;
+            border: 2px solid #3b82f6;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 10pt;
+            font-weight: 600;
+            color: #1e40af;
+        }
+
+        .flujo-arrow {
+            font-size: 16pt;
+            color: #64748b;
+        }
+
+        /* Pasos numerados */
+        .step {
+            display: flex;
+            margin: 12px 0;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background: #3b82f6;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 11pt;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+            padding-top: 3px;
+        }
+
+        /* FAQ */
+        .faq-item {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 6px;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            color: #1e40af;
+            margin-bottom: 8px;
+        }
+
+        .faq-answer {
+            color: #475569;
+        }
+
+        /* Footer de página */
+        .page-footer {
+            position: absolute;
+            bottom: 15mm;
+            left: 20mm;
+            right: 20mm;
+            font-size: 9pt;
+            color: #64748b;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 10px;
+        }
+
+        /* Utilidades */
+        .text-center { text-align: center; }
+        .text-muted { color: #64748b; }
+        .mt-2 { margin-top: 10px; }
+        .mb-2 { margin-bottom: 10px; }
+        .mt-3 { margin-top: 15px; }
+        .mb-3 { margin-bottom: 15px; }
+
+        /* Imprimir */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .page {
+                margin: 0;
+                width: 100%;
+                page-break-after: always;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- PORTADA -->
+<div class="page">
+    <div class="cover">
+        <h1>MANUAL DE USUARIO</h1>
+        <div class="subtitle">Sistema de Gestión de Producción</div>
+        <div class="version">Versión 1.0 – Marzo 2026</div>
+        <div class="author">Ilich Esteban Reyes Botia</div>
+        <div class="company">DICO Telecomunicaciones</div>
+    </div>
+</div>
+
+<!-- TABLA DE CONTENIDO -->
+<div class="page toc-page">
+    <h1 class="toc-title">Contenido</h1>
+    <ul class="toc-list">
+        <li><span class="number">1</span> Introducción al Sistema</li>
+        <li><span class="number">2</span> Requisitos y Acceso</li>
+        <li><span class="number">3</span> Guía por Roles de Usuario</li>
+        <li><span class="number">4</span> Módulo de Órdenes de Producción</li>
+        <li><span class="number">5</span> Módulo de Tareas de Producción</li>
+        <li><span class="number">6</span> Seguimiento y Cambio de Estados</li>
+        <li><span class="number">7</span> Módulo de Reportes</li>
+        <li><span class="number">8</span> Módulos Auxiliares</li>
+        <li><span class="number">9</span> Preguntas Frecuentes</li>
+    </ul>
+    <div class="page-footer">Sistema de Gestión de Producción – Manual de Usuario</div>
+</div>
+
+<!-- SECCIÓN 1: INTRODUCCIÓN -->
+<div class="page">
+    <div class="section-header">1. Introducción al Sistema</div>
+
+    <p>El <strong>Sistema de Gestión de Producción</strong> es una aplicación web desarrollada para el control y seguimiento de órdenes y tareas de producción en talleres industriales. Permite gestionar el flujo completo de trabajo desde la creación de órdenes hasta la finalización de tareas individuales.</p>
+
+    <h2>Características Principales</h2>
+    <ul>
+        <li><strong>Gestión de órdenes de producción</strong> con códigos automáticos</li>
+        <li><strong>Asignación de tareas</strong> a operarios y máquinas</li>
+        <li><strong>Control de estados</strong> en tiempo real (pendiente, en proceso, completada)</li>
+        <li><strong>Sistema de seguimiento</strong> con historial de cambios</li>
+        <li><strong>Reportes exportables</strong> a PDF con estadísticas</li>
+        <li><strong>Control de acceso</strong> por roles (Admin, Supervisor, Operario)</li>
+        <li><strong>Gestión de empresas</strong>, máquinas y personal</li>
+    </ul>
+
+    <h2>Arquitectura del Sistema</h2>
+    <table>
+        <tr>
+            <th>Componente</th>
+            <th>Tecnología</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Framework</td>
+            <td>CodeIgniter 4</td>
+            <td>PHP MVC moderno</td>
+        </tr>
+        <tr>
+            <td>Frontend</td>
+            <td>Bootstrap 5.3</td>
+            <td>Diseño responsive</td>
+        </tr>
+        <tr>
+            <td>Base de Datos</td>
+            <td>MySQL</td>
+            <td>Via XAMPP</td>
+        </tr>
+        <tr>
+            <td>Generación PDF</td>
+            <td>TCPDF</td>
+            <td>Exportación de reportes</td>
+        </tr>
+        <tr>
+            <td>Gráficos</td>
+            <td>Chart.js</td>
+            <td>Visualización de datos</td>
+        </tr>
+    </table>
+
+    <div class="page-footer">Sistema de Gestión de Producción – Manual de Usuario</div>
+</div>
+
+<!-- SECCIÓN 2: REQUISITOS -->
+<div class="page">
+    <div class="section-header">2. Requisitos y Acceso</div>
+
+    <h2>Requisitos Técnicos</h2>
+    <ul>
+        <li>Navegador web moderno (Chrome, Firefox, Edge, Safari)</li>
+        <li>Conexión a Internet o red local</li>
+        <li>Resolución mínima recomendada: 1280x720</li>
+        <li>JavaScript habilitado</li>
+    </ul>
+
+    <h2>Acceso al Sistema</h2>
+    <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">Abra su navegador web e ingrese la URL del sistema</div>
+    </div>
+    <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">En la pantalla de login, ingrese su correo electrónico y contraseña</div>
+    </div>
+    <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">Haga clic en "Iniciar Sesión"</div>
+    </div>
+
+    <div class="credentials">
+        <div class="credentials-title">Credenciales de Prueba</div>
+        <div class="credential-item">
+            <strong>Administrador:</strong> admin@taller.com / ilich123
+        </div>
+        <div class="credential-item">
+            <strong>Supervisor:</strong> supervisor@taller.com / ilich123
+        </div>
+        <div class="credential-item">
+            <strong>Operario:</strong> carlos.martinez@techparts.com / ilich123
+        </div>
+    </div>
+
+    <div class="info-box warning">
+        <div class="info-box-title">Nota de Seguridad</div>
+        <p>Cambie las contraseñas por defecto en un entorno de producción. Use contraseñas seguras con al menos 8 caracteres, incluyendo mayúsculas, minúsculas y números.</p>
+    </div>
+
+    <h2>Pantalla de Inicio de Sesión</h2>
+    <p>La pantalla de login presenta un diseño moderno con tema oscuro que incluye:</p>
+    <ul>
+        <li>Campo de correo electrónico</li>
+        <li>Campo de contraseña (oculta)</li>
+        <li>Botón de inicio de sesión</li>
+        <li>Mensajes de error en caso de credenciales incorrectas</li>
+    </ul>
+
+    <div class="page-footer">Sistema de Gestión de Producción – Manual de Usuario</div>
+</div>
+
+<!-- SECCIÓN 3: ROLES -->
+<div class="page">
+    <div class="section-header">3. Guía por Roles de Usuario</div>
+
+    <p>El sistema implementa un control de acceso basado en tres roles de usuario. Cada rol tiene permisos específicos que determinan las funcionalidades disponibles.</p>
+
+    <div class="role-card role-admin">
+        <div class="role-title">ADMINISTRADOR</div>
+        <p>Tiene acceso completo a todas las funcionalidades del sistema:</p>
+        <ul>
+            <li>Gestión de empresas (crear, editar, eliminar)</li>
+            <li>Gestión completa de usuarios y roles</li>
+            <li>Crear, editar y eliminar órdenes de producción</li>
+            <li>Crear, editar y eliminar tareas</li>
+            <li>Acceso a todos los reportes y estadísticas</li>
+            <li>Configuración del sistema</li>
+        </ul>
+    </div>
+
+    <div class="role-card role-supervisor">
+        <div class="role-title">SUPERVISOR</div>
+        <p>Puede gestionar la producción pero no la configuración del sistema:</p>
+        <ul>
+            <li>Crear y editar órdenes de producción</li>
+            <li>Crear y editar tareas</li>
+            <li>Cambiar estados de órdenes y tareas</li>
+            <li>Ver reportes y estadísticas</li>
+            <li>Acceso a calidad, almacén y personal</li>
+            <li><strong>NO</strong> puede eliminar registros ni gestionar usuarios</li>
+        </ul>
+    </div>
+
+    <div class="role-card role-operario">
+        <div class="role-title">OPERARIO</div>
+        <p>Acceso limitado para ejecutar tareas asignadas:</p>
+        <ul>
+            <li>Ver solo sus tareas asignadas</li>
+            <li>Cambiar estado de sus tareas (iniciar, pausar, completar)</li>
+            <li>Ver órdenes de producción (solo lectura)</li>
+            <li>Acceso al seguimiento de cambios</li>
+            <li>Ver máquinas (solo lectura)</li>
+        </ul>
+    </div>
+
+    <div class="info-box">
+        <div class="info-box-title">Visualización de Permisos</div>
+        <p>En el menú "Usuarios", los administradores pueden ver una tabla de permisos que muestra qué funcionalidades tiene disponible cada rol en el sistema.</p>
+    </div>
+
+    <div class="page-footer">Sistema de Gestión de Producción – Manual de Usuario</div>
+</div>
+
+<!-- SECCIÓN 4: ÓRDENES -->
+<div class="page">
+    <div class="section-header">4. Módulo de Órdenes de Producción</div>
+
+    <p>Las órdenes de producción representan trabajos completos solicitados por clientes. Cada orden tiene un código único generado automáticamente con el formato <code>ORD-AAAA-NNN</code> (año + número secuencial).</p>
+
+    <h2>Estados de una Orden</h2>
+    <table>
+        <tr>
+            <th>Estado</th>
+            <th>Descripción</th>
+            <th>Color</th>
+        </tr>
+        <tr>
+            <td><span class="estado estado-pendiente">Pendiente</span></td>
+            <td>La orden está creada pero aún no ha iniciado</td>
+            <td>Amarillo</td>
+        </tr>
+        <tr>
+            <td><span class="estado estado-proceso">En proceso</span></td>
+            <td>La orden tiene tareas siendo ejecutadas</td>
+            <td>Azul</td>
+        </tr>
+        <tr>
+            <td><span class="estado estado-pausada">Pausada</span></td>
+            <td>La orden está temporalmente detenida</td>
+            <td>Rosa</td>
+        </tr>
+        <tr>
+            <td><span class="estado estado-completada">Completada</span></td>
+            <td>Todas las tareas han finalizado</td>
+            <td>Verde</td>
+        </tr>
+        <tr>
+            <td><span class="estado estado-cancelada">Cancelada</span></td>
+            <td>La orden fue anulada</td>
+            <td>Rojo</td>
+        </tr>
+    </table>
+
+    <h2>Flujo de Trabajo</h2>
+    <div class="flujo">
+        <div class="flujo-item">Crear Orden</div>
+        <span class="flujo-arrow">→</span>
+        <div class="flujo-item">Asignar Tareas</div>
+        <span class="flujo-arrow">→</span>
+        <div class="flujo-item">Seguimiento</div>
+        <span class="flujo-arrow">→</span>
+        <div class="flujo-item">Completar</div>
+    </div>
+
+    <h2>Crear una Nueva Orden</h2>
+    <ol>
+        <li>Acceda al módulo "Órdenes de Producción"</li>
+        <li>Haga clic en el botón "Nueva Orden"</li>
+        <li>Complete los siguientes campos:
+            <ul>
+                <li><strong>Descripción del producto:</strong> Detalle lo que se va a fabricar</li>
+                <li><strong>Cantidad solicitada:</strong> Número de unidades</li>
+                <li><strong>Fecha límite:</strong> Fecha de entrega comprometida</li>
+                <li><strong>Prioridad:</strong> Baja, Media, Alta o Urgente</li>
+                <li><strong>Empresa:</strong> Cliente solicitante</li>
+                <li><strong>Observaciones:</strong> Notas adicionales (opcional)</li>
+            </ul>
+        </li>
+        <li>Haga clic en "Guardar"</li>
+    </ol>
+
+    <h2>Gestión de Órdenes</h2>
+    <p>Desde el listado de órdenes puede:</p>
+    <ul>
+        <li><strong>Filtrar:</strong> Por estado o prioridad</li>
+        <li><strong>Ver detalle:</strong> Haga clic en el código de la orden</li>
+        <li><strong>Editar:</strong> Modificar datos de la orden</li>
+        <li><strong>Eliminar:</strong> Solo admin (con confirmación)</li>
+        <li><strong>Cambiar estado:</strong> Usando el botón de estado</li>
+    </ul>
+
+    <div class="page-footer">Sistema de Gestión de Producción – Manual de Usuario</div>
+</div>
+
+<!-- SECCIÓN 5: TAREAS -->
+<div class="page">
+    <div class="section-header">5. Módulo de Tareas de Producción</div>
+
+    <p>Las tareas son las unidades de trabajo individuales que componen una orden. Cada tarea se asigna a un operario y opcionalmente a una máquina.</p>
+
+    <h2>Campos Importantes</h2>
+    <table>
+        <tr>
+            <th>Campo</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td>Nombre de tarea</td>
+            <td>Descripción breve de la actividad</td>
+        </tr>
+        <tr>
+            <td>Orden asociada</td>
+            <td>La orden de producción a la que pertenece</td>
+        </tr>
+        <tr>
+            <td>Operario</td>
+            <td>Persona responsable de ejecutar la tarea</td>
+        </tr>
+        <tr>
+            <td>Máquina</td>
+            <td>Equipo a utilizar (opcional)</td>
+        </tr>
+        <tr>
+            <td>Tiempo estimado</td>
+            <td>Duración prevista en minutos</td>
+        </tr>
+        <tr>
+            <td>Cantidad a producir</td>
+            <td>Unidades esperadas de la tarea</td>
+        </tr>
+    </table>
+
+    <h2>Estados de una Tarea</h2>
+    <table>
+        <tr>
+            <th>Estado</th>
+            <th>Descripción</th>
+        </tr>
+        <tr>
+            <td><span class="estado estado-pendiente">Asignada</span></td>
+            <td>Tarea creada, esperando inicio</td>
+        </tr>
+        <tr>
+            <td><span class="estado estado-proceso">En proceso</span></td>
+            <td>El operario está trabajando en ella</td>
+        </tr>
+        <tr>
+            <td><span class="estado estado-pausada">Pausada</span></td>
+            <td>Trabajo temporalmente detenido</td>
+        </tr>
+        <tr>
+            <td><span class="estado estado-completada">Completada</span></td>
+            <td>Tarea finalizada</td>
+        </tr>
+        <tr>
+            <td><span class="estado estado-cancelada">Cancelada</span></td>
+            <td>Tarea anulada</td>
+        </tr>
+    </table>
+
+    <h2>Crear una Nueva Tarea</h2>
+    <ol>
+        <li>Acceda al módulo "Tareas de Producción"</li>
+        <li>Haga clic en "Nueva Tarea"</li>
+        <li>Complete el formulario:
+            <ul>
+                <li>Seleccione la orden asociada</li>
+                <li>Ingrese nombre y descripción</li>
+                <li>Asigne un operario</li>
+                <li>Seleccione máquina (si aplica)</li>
+                <li>Defina tiempo estimado y cantidad</li>
+            </ul>
+        </li>
+        <li>Guarde los cambios</li>
+    </ol>
+
+    <div class="info-box success">
+        <div class="info-box-title">Consejo</div>
+        <p>También puede crear tareas directamente desde la vista de detalle de una orden, lo que automáticamente asocia la tarea a esa orden.</p>
+    </div>
+
+    <div class="page-footer">Sistema de Gestión de Producción – Manual de Usuario</div>
+</div>
+
+<!-- SECCIÓN 6: SEGUIMIENTO -->
+<div class="page">
+    <div class="section-header">6. Seguimiento y Cambio de Estados</div>
+
+    <p>El sistema registra automáticamente todos los cambios de estado tanto de órdenes como de tareas, creando un historial de auditoría completo.</p>
+
+    <h2>Página de Seguimiento</h2>
+    <p>El módulo de seguimiento muestra todas las órdenes ordenadas por prioridad y estado, con información de progreso:</p>
+    <ul>
+        <li>Total de tareas por orden</li>
+        <li>Tareas completadas</li>
+        <li>Porcentaje de avance</li>
+        <li>Estado actual</li>
+        <li>Empresa solicitante</li>
+    </ul>
+
+    <h2>Para Cambiar el Estado</h2>
+    <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">Desde el listado, haga clic en el botón del estado actual</div>
+    </div>
+    <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">Seleccione el nuevo estado del menú desplegable</div>
+    </div>
+    <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">Ingrese observaciones (opcional pero recomendado)</div>
+    </div>
+    <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-content">Confirme el cambio</div>
+    </div>
+
+    <h2>Transiciones Válidas</h2>
+    <p>Por seguridad, solo ciertas transiciones de estado están permitidas:</p>
+
+    <h3>Órdenes de Producción</h3>
+    <table>
+        <tr>
+            <th>Estado Actual</th>
+            <th>Puede cambiar a</th>
+        </tr>
+        <tr>
+            <td><span class="estado estado-pendiente">Pendiente</span></td>
+            <td>En proceso, Cancelada</td>
+        </tr>
+        <tr>
+            <td><span class="estado estado-proceso">En proceso</span></td>
+            <td>Pausada, Completada, Cancelada</td>
+        </tr>
+        <tr>
+            <td><span class="estado estado-pausada">Pausada</span></td>
+            <td>En proceso, Cancelada</td>
+        </tr>
+        <tr>
+            <td><span class="estado estado-completada">Completada</span></td>
+            <td>No tiene transiciones (final)</td>
+        </tr>
+        <tr>
+            <td><span class="estado estado-cancelada">Cancelada</span></td>
+            <td>No tiene transiciones (final)</td>
+        </tr>
+    </table>
+
+    <h3>Tareas de Producción</h3>
+    <table>
+        <tr>
+            <th>Estado Actual</th>
+            <th>Puede cambiar a</th>
+        </tr>
+        <tr>
+            <td><span class="estado estado-pendiente">Asignada</span></td>
+            <td>En proceso, Cancelada</td>
+        </tr>
+        <tr>
+            <td><span class="estado estado-proceso">En proceso</span></td>
+            <td>Pausada, Completada, Cancelada</td>
+        </tr>
+        <tr>
+            <td><span class="estado estado-pausada">Pausada</span></td>
+            <td>En proceso, Cancelada</td>
+        </tr>
+    </table>
+
+    <div class="info-box">
+        <div class="info-box-title">Historial de Cambios</div>
+        <p>Cada cambio de estado registra: fecha y hora exacta, usuario responsable, estado anterior, estado nuevo y observaciones ingresadas. Este historial es visible en la vista de detalle de cada orden.</p>
+    </div>
+
+    <div class="page-footer">Sistema de Gestión de Producción – Manual de Usuario</div>
+</div>
+
+<!-- SECCIÓN 7: REPORTES -->
+<div class="page">
+    <div class="section-header">7. Módulo de Reportes</div>
+
+    <p>El módulo de reportes permite visualizar y exportar estadísticas de la producción en formato PDF. Incluye dashboards interactivos y reportes filtrables.</p>
+
+    <h2>Tipos de Reportes Disponibles</h2>
+
+    <h3>1. Dashboard de Reportes</h3>
+    <p>Vista general con KPIs principales:</p>
+    <ul>
+        <li>Total de órdenes y tareas</li>
+        <li>Distribución por estado</li>
+        <li>Historial de cambios recientes</li>
+        <li>Acceso rápido a otros reportes</li>
+    </ul>
+
+    <h3>2. Reporte de Órdenes</h3>
+    <p>Listado filtrable por:</p>
+    <ul>
+        <li>Rango de fechas (desde/hasta)</li>
+        <li>Estado (pendiente, en proceso, completada, etc.)</li>
+        <li>Prioridad (baja, media, alta, urgente)</li>
+        <li>Empresa específica</li>
+    </ul>
+    <p>El PDF incluye: código, producto, empresa, prioridad, estado y fecha de creación.</p>
+
+    <h3>3. Reporte de Tareas</h3>
+    <p>Detalle de tareas filtrable por:</p>
+    <ul>
+        <li>Fecha de inicio</li>
+        <li>Estado actual</li>
+        <li>Operario asignado</li>
+        <li>Máquina utilizada</li>
+    </ul>
+    <p>El PDF incluye: nombre de tarea, orden, operario, máquina, estado, tiempos y unidades producidas.</p>
+
+    <h3>4. Resumen Estadístico</h3>
+    <p>Dashboard completo con:</p>
+    <ul>
+        <li>Gráfico circular de distribución por estado</li>
+        <li>Gráfico de barras por prioridad</li>
+        <li>Producción por empresa</li>
+        <li>Rendimiento de operarios</li>
+        <li>Historial de actividad reciente</li>
+    </ul>
+
+    <h2>Generar un PDF</h2>
+    <ol>
+        <li>Acceda al reporte deseado</li>
+        <li>Aplique los filtros necesarios</li>
+        <li>Haga clic en "Descargar PDF"</li>
+        <li>El archivo se descargará automáticamente con fecha y hora en el nombre</li>
+    </ol>
+
+    <div class="info-box success">
+        <div class="info-box-title">Formato de PDF</div>
+        <p>Los PDFs incluyen encabezado con título, información del sistema y pie de página con numeración. Las tablas tienen formato alternado (zebra striping) para facilitar la lectura.</p>
+    </div>
+
+    <div class="page-footer">Sistema de Gestión de Producción – Manual de Usuario</div>
+</div>
+
+<!-- SECCIÓN 8: MÓDULOS AUXILIARES -->
+<div class="page">
+    <div class="section-header">8. Módulos Auxiliares</div>
+
+    <h2>Gestión de Máquinas</h2>
+    <p>Catálogo de equipos disponibles en el taller:</p>
+    <ul>
+        <li>Tornos</li>
+        <li>Fresadoras</li>
+        <li>Cortadoras láser</li>
+        <li>Soldadoras</li>
+        <li>Otros equipos industriales</li>
+    </ul>
+    <p>Todas las máquinas están disponibles en solo lectura para todos los roles.</p>
+
+    <h2>Control de Calidad</h2>
+    <p>Módulos relacionados con la gestión de calidad:</p>
+    <ul>
+        <li><strong>Inspecciones:</strong> Registro de inspecciones con resultado (aprobado, retrabajo, rechazado)</li>
+        <li><strong>Tipos de Defecto:</strong> Catálogo de defectos comunes para clasificación</li>
+    </ul>
+    <p>Accesible solo para admin y supervisores.</p>
+
+    <h2>Almacén</h2>
+    <p>Gestión de inventario y almacenes:</p>
+    <ul>
+        <li><strong>Productos Terminados:</strong> Productos listos para despacho</li>
+        <li><strong>Almacenes:</strong> Bodegas y capacidad de almacenamiento</li>
+    </ul>
+
+    <h2>Gestión de Personal</h2>
+    <p>Administración de recursos humanos:</p>
+    <ul>
+        <li><strong>Operarios:</strong> Personal, habilidades y certificaciones</li>
+        <li><strong>Turnos:</strong> Horarios de trabajo del personal</li>
+    </ul>
+
+    <h2>Empresas</h2>
+    <p>Gestión multi-empresa. Solo administradores pueden:</p>
+    <ul>
+        <li>Crear nuevas empresas</li>
+        <li>Editar información de empresas existentes</li>
+        <li>Asociar usuarios a empresas</li>
+    </ul>
+
+    <h2>Usuarios y Roles</h2>
+    <p>Gestión de acceso al sistema:</p>
+    <ul>
+        <li>Listado de usuarios con empresa asociada</li>
+        <li>Visualización de permisos por rol</li>
+        <li>Tabla comparativa de funcionalidades</li>
+    </ul>
+    <div class="info-box warning">
+        <div class="info-box-title">Restricción</div>
+        <p>La gestión de usuarios es exclusiva del rol Administrador. Los supervisores y operarios no tienen acceso a estos módulos.</p>
+    </div>
+
+    <div class="page-footer">Sistema de Gestión de Producción – Manual de Usuario</div>
+</div>
+
+<!-- SECCIÓN 9: FAQ -->
+<div class="page">
+    <div class="section-header">9. Preguntas Frecuentes</div>
+
+    <div class="faq-item">
+        <div class="faq-question">¿Cómo recupero mi contraseña?</div>
+        <div class="faq-answer">Contacte al administrador del sistema para que restablezca su contraseña. El administrador puede acceder al módulo de usuarios y generar una nueva contraseña temporal.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">¿Puedo ver el sistema desde mi celular?</div>
+        <div class="faq-answer">Sí, el sistema es responsive y se adapta a dispositivos móviles. Sin embargo, para un mejor manejo de datos y reportes, se recomienda usar pantallas de escritorio.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">¿Qué pasa si cancelo una orden?</div>
+        <div class="faq-answer">Cuando cancela una orden, todas las tareas asociadas también se marcan como canceladas y se registra en el historial. Esta acción no se puede deshacer.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">¿Cómo sé cuántas unidades ha producido un operario?</div>
+        <div class="faq-answer">Use el Reporte de Tareas filtrado por operario y período. El reporte mostrará el total de unidades producidas por ese operario en el rango de fechas seleccionado.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">¿Puedo editar una orden completada?</div>
+        <div class="faq-answer">No, las órdenes completadas o canceladas no pueden editarse. Si necesita hacer cambios, contacte al administrador para evaluar opciones.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">¿Dónde veo quién hizo cambios?</div>
+        <div class="faq-answer">En el módulo de Seguimiento o en el historial del dashboard. Cada cambio registra: fecha, hora, usuario responsable y estados involucrados.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">¿Puedo asignar una tarea sin máquina?</div>
+        <div class="faq-answer">Sí, el campo máquina es opcional. Algunas tareas como ensamblaje manual o inspección visual no requieren máquina específica.</div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">¿Cómo cambio mi rol de usuario?</div>
+        <div class="faq-answer">Los usuarios no pueden cambiar su propio rol. Contacte al administrador del sistema para solicitar un cambio de rol justificado.</div>
+    </div>
+
+    <h2>Soporte Técnico</h2>
+    <p>Para soporte técnico adicional:</p>
+    <ul>
+        <li>Consulte al administrador del sistema</li>
+        <li>Revise el historial de errores en el dashboard</li>
+        <li>Contacte a DICO Telecomunicaciones</li>
+    </ul>
+
+    <div class="info-box">
+        <div class="info-box-title">Versión del Sistema</div>
+        <p>Este manual corresponde a la versión 1.0 del Sistema de Gestión de Producción, desarrollado en marzo de 2026.</p>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px solid #e2e8f0;">
+        <p style="font-size: 10pt; color: #64748b;">
+            Documento generado el 24 de marzo de 2026<br>
+            Sistema de Gestión de Producción – DICO Telecomunicaciones<br>
+            © 2026 Todos los derechos reservados
+        </p>
+    </div>
+
+    <div class="page-footer">Sistema de Gestión de Producción – Manual de Usuario</div>
+</div>
+
+</body>
+</html>

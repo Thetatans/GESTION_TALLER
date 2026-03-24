@@ -2,6 +2,8 @@
 
 namespace Config;
 
+use App\Filters\AuthFilter;
+use App\Filters\RolFilter;
 use CodeIgniter\Config\Filters as BaseFilters;
 use CodeIgniter\Filters\Cors;
 use CodeIgniter\Filters\CSRF;
@@ -34,6 +36,9 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
+        // Semana 8 – Autenticación y control de acceso
+        'auth'          => AuthFilter::class,
+        'rol'           => RolFilter::class,
     ];
 
     /**
@@ -72,6 +77,8 @@ class Filters extends BaseFilters
      */
     public array $globals = [
         'before' => [
+            // Protege todas las rutas excepto las públicas
+            'auth' => ['except' => ['login', 'logout', 'auth/setup', 'auth/debug', '403']],
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',

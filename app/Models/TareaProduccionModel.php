@@ -11,6 +11,7 @@ class TareaProduccionModel extends Model
     protected $allowedFields = [
         'id_orden', 'id_maquina', 'id_operario', 'nombre_tarea', 'descripcion',
         'fecha_inicio', 'fecha_fin', 'cantidad_producida', 'estado', 'observaciones',
+        'tiempo_estimado_minutos',
     ];
     protected $useTimestamps = false;
 
@@ -22,7 +23,8 @@ class TareaProduccionModel extends Model
         'estado'              => 'required|in_list[asignada,en proceso,pausada,completada,cancelada]',
         'fecha_inicio'        => 'permit_empty|valid_date',
         'fecha_fin'           => 'permit_empty|valid_date',
-        'cantidad_producida'  => 'permit_empty|integer|greater_than_equal_to[0]',
+        'cantidad_producida'       => 'permit_empty|integer|greater_than_equal_to[0]',
+        'tiempo_estimado_minutos'  => 'permit_empty|integer|greater_than_equal_to[0]',
     ];
 
     protected $validationMessages = [

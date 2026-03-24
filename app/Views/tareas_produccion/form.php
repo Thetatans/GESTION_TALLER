@@ -122,21 +122,32 @@
             </div>
 
             <div class="row">
-                <div class="col-md-4 mb-3">
+                <div class="col-md-3 mb-3">
                     <label for="fecha_inicio" class="form-label">Fecha Inicio</label>
                     <input type="datetime-local" class="form-control"
                            id="fecha_inicio" name="fecha_inicio"
                            value="<?= esc($tarea['fecha_inicio'] ?? '') ?>">
                 </div>
 
-                <div class="col-md-4 mb-3">
+                <div class="col-md-3 mb-3">
                     <label for="fecha_fin" class="form-label">Fecha Fin</label>
                     <input type="datetime-local" class="form-control"
                            id="fecha_fin" name="fecha_fin"
                            value="<?= esc($tarea['fecha_fin'] ?? '') ?>">
                 </div>
 
-                <div class="col-md-4 mb-3">
+                <div class="col-md-3 mb-3">
+                    <label for="tiempo_estimado_minutos" class="form-label">Tiempo Estimado (min)</label>
+                    <input type="number" class="form-control <?= isset($errors['tiempo_estimado_minutos']) ? 'is-invalid' : '' ?>"
+                           id="tiempo_estimado_minutos" name="tiempo_estimado_minutos"
+                           value="<?= esc($tarea['tiempo_estimado_minutos'] ?? '') ?>"
+                           min="0" placeholder="Ej: 120">
+                    <?php if (isset($errors['tiempo_estimado_minutos'])): ?>
+                        <div class="invalid-feedback"><?= esc($errors['tiempo_estimado_minutos']) ?></div>
+                    <?php endif; ?>
+                </div>
+
+                <div class="col-md-3 mb-3">
                     <label for="cantidad_producida" class="form-label">Cantidad Producida</label>
                     <input type="number" class="form-control"
                            id="cantidad_producida" name="cantidad_producida"

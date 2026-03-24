@@ -20,21 +20,47 @@ use Psr\Log\LoggerInterface;
  */
 abstract class BaseController extends Controller
 {
-    /**
-     * Be sure to declare properties for any property fetch you initialized.
-     * The creation of dynamic property is deprecated in PHP 8.2.
-     */
-
     protected $session;
     protected $helpers = ['form', 'url'];
 
-    /**
-     * @return void
-     */
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
         parent::initController($request, $response, $logger);
 
         $this->session = service('session');
+    }
+
+    // ── Helpers de seguridad ─────────────────────────────────────
+
+    /**
+     * Verifica que el usuario tenga alguno de los roles indicados.
+     * Si no cumple, redirige a /403.
+     *
+     * Uso: $this->requireRol('admin')
+     *      $this->requireRol('admin', 'supervisor')
+     */
+    protected function requireRol(string ...$roles)
+    {
+        $rolActual = $this->session->get('rol');
+        if (! in_array($rolActual, $roles)) {
+            return redirect()->to('/403');
+        }
+        return null;
+    }
+
+    /**
+     * Retorna el rol del usuario en sesión.
+     */
+    protected function rolActual(): ?string
+    {
+        return $this->session->get('rol');
+    }
+
+    /**
+     * Retorna el id del usuario en sesión.
+     */
+    protected function idUsuarioActual(): ?int
+    {
+        return $this->session->get('id_usuario');
     }
 }

@@ -2,6 +2,17 @@
 
 <?= $this->section('content') ?>
 
+<!-- Boton Manual de Usuario -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="mb-0"><i class="bi bi-speedometer2 me-2"></i>Dashboard</h2>
+        <p class="text-muted mb-0">Panel de control del sistema</p>
+    </div>
+    <a href="<?= base_url('docs/manual_usuario.pdf') ?>" class="btn btn-purple" style="background:#7c3aed;color:white" target="_blank">
+        <i class="bi bi-book me-2"></i>Manual de Usuario
+    </a>
+</div>
+
 <div class="row g-4 mb-4">
     <div class="col-md-3">
         <div class="card border-0 shadow-sm">
